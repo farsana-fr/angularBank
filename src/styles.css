@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+header
+{
+    height: 5rem;
+}
+
+footer h1
+{
+    background-color: rgb(17, 29, 157);
+    height: 3rem;
+    font-size: small;
+}
+body{
+    background-image: url("../src/assets/backgroundImg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    max-height: 120vh;
+}
