@@ -13,8 +13,8 @@ export class LoginComponent {
   inputPWD = 'Enter your Password';
   lgnPwd="lgnPwd"
 
-  accNo = '';
-  pwd: any;
+  // accNo = '';
+  // pwd: any;
 
   userDetails: any = {
     1001: { acno: 1001, username: 'amal', password: 'abc123', balance: 0 },
@@ -27,10 +27,41 @@ export class LoginComponent {
   // ngOnInit(): void {
 
   // }
-  login() {
+  // login() {
 
-    var acNo=this.accNo;
-    var passW=this.pwd
+  //   var acNo=this.accNo;
+  //   var passW=this.pwd
+  //   var uDetails=this.userDetails
+  //   console.log(uDetails);
+  //   console.log(acNo);
+  //   console.log(passW);
+  //   if(acNo in uDetails)
+  //   {
+  //     console.log(uDetails[acNo]["password"]);
+  //     if(passW==uDetails[acNo]["password"])
+  //     {
+  //       alert("Login Success");
+  //     }
+  //     else
+  //     {
+  //       alert("Incorrect Password");
+  //     }
+  //   }
+  //   else{
+  //     alert("Account Number is Incorrect")
+  //   }
+  // }
+  // accEnter(event: any) {
+  //   this.accNo = event.target.value;
+  // }
+  // pwdEnter(event: any) {
+  //   this.pwd = event.target.value;
+  // }
+
+  login(a:any,b:any) {
+
+    var acNo=a.value;
+    var passW=b.value;
     var uDetails=this.userDetails
     console.log(uDetails);
     console.log(acNo);
@@ -50,11 +81,5 @@ export class LoginComponent {
     else{
       alert("Account Number is Incorrect")
     }
-  }
-  accEnter(event: any) {
-    this.accNo = event.target.value;
-  }
-  pwdEnter(event: any) {
-    this.pwd = event.target.value;
   }
 }

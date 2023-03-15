@@ -5,16 +5,15 @@
     <form action="" class="outer container border rounded-4 p-2">
       <i class="fa-solid fa-user text-light"></i>
       <input
-        type="text"
-        (change)="accEnter($event)"
+        type="text" #acno
         id="lgnAccNo" name="lgnAccNoName"
         class="m-4 w-50"
         [placeholder]="inputAccNo"
         required/><br />
       <i class="fa-solid fa-lock text-light"></i>
       <input
-        type="password"
-        (change)="pwdEnter($event)"
+        type="password" 
+        #pwd
         [id]="lgnPwd" name="lgnPwdName"
         class="m-4 w-50"
         [placeholder]="inputPWD"
@@ -23,7 +22,7 @@
       <button
         type="button"
         id="login"
-        (click)="login()"
+        (click)="login(acno,pwd)"
         class="btn btn-success rounded-pill"
       >
         Log In
