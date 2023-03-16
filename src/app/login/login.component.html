@@ -5,7 +5,7 @@
     <form action="" class="outer container border rounded-4 p-2">
       <i class="fa-solid fa-user text-light"></i>
       <input
-        type="text" #acno
+        type="text" [(ngModel)]="accNo"
         id="lgnAccNo" name="lgnAccNoName"
         class="m-4 w-50"
         [placeholder]="inputAccNo"
@@ -13,7 +13,7 @@
       <i class="fa-solid fa-lock text-light"></i>
       <input
         type="password" 
-        #pwd
+        [(ngModel)]="pwd"
         [id]="lgnPwd" name="lgnPwdName"
         class="m-4 w-50"
         [placeholder]="inputPWD"
@@ -22,7 +22,7 @@
       <button
         type="button"
         id="login"
-        (click)="login(acno,pwd)"
+        (click)="login()"
         class="btn btn-success rounded-pill"
       >
         Log In
@@ -32,6 +32,3 @@
       </div>
     </form>
   </div>
-  
-  
-
