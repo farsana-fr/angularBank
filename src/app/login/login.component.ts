@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-// import { Component,OnInit } from '@angular/core';
+// import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-login',
@@ -7,48 +9,37 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.css'],
 })
 // implements OnInit
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   caption = 'Your Perfect Banking Partner';
   inputAccNo = 'Enter Account No';
   inputPWD = 'Enter your Password';
-  lgnPwd="lgnPwd"
+  lgnPwd = 'lgnPwd';
 
   accNo = '';
   pwd: any;
+  
+  constructor(private router: Router,private ds:DataService) {
 
-  userDetails: any = {
-    1001: { acno: 1001, username: 'amal', password: 'abc123', balance: 0 },
-    1002: { acno: 1002, username: 'raj', password: 'abc123', balance: 0 },
-    1003: { acno: 1003, username: 'deepak', password: 'abc123', balance: 0 },
-    1004: { acno: 1004, username: 'anu', password: 'abc123', balance: 0 },
-  };
-  constructor() {}
+  }
 
-  // ngOnInit(): void {
-
-  // }
+  ngOnInit(): void {}
   login() {
-
-    var acNo=this.accNo;
-    var passW=this.pwd
-    var uDetails=this.userDetails
+    var acNo = this.accNo;
+    var passW = this.pwd;
+    var uDetails = this.ds.userDetails;
     console.log(uDetails);
     console.log(acNo);
     console.log(passW);
-    if(acNo in uDetails)
-    {
-      console.log(uDetails[acNo]["password"]);
-      if(passW==uDetails[acNo]["password"])
-      {
-        alert("Login Success");
+    if (acNo in uDetails) {
+      console.log(uDetails[acNo]['password']);
+      if (passW == uDetails[acNo]['password']) {
+        alert('Login Success');
+        this.router.navigateByUrl('dashboard')
+      } else {
+        alert('Incorrect Password');
       }
-      else
-      {
-        alert("Incorrect Password");
-      }
-    }
-    else{
-      alert("Account Number is Incorrect")
+    } else {
+      alert('Account Number is Incorrect');
     }
   }
   // accEnter(event: any) {

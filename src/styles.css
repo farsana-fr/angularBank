@@ -14,5 +14,5 @@ body{
     background-image: url("../src/assets/backgroundImg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    max-height: 120vh;
+    height: 90vh;
 }

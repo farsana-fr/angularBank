@@ -1,0 +1,36 @@
+
+
+<div class="  text-center p-5">
+   <h3 class="text-light mb-5">Sign Up</h3>
+   <form action="" class="outer container border rounded-4 p-2">
+     <input
+       type="text" 
+       [(ngModel)]="uName"
+       id="uNameID" name="uName"
+       class="m-4 w-50"
+       placeholder="Enter FullName"
+       required/><br />
+     <input
+       type="text" 
+       [(ngModel)]="accNo"
+       id="accID" name="accName"
+       class="m-4 w-50"
+       placeholder="Enter Account Number"
+       required/><br />
+     <input
+       type="password" [(ngModel)]="pwd"
+       id="pwdID" name="pwdName"
+       class="m-4 w-50"
+       placeholder="Enter password"
+       required
+     /><br />
+     <button
+       type="button"
+       id="register"
+        (click)="register()"
+       class="btn btn-success rounded-pill"
+     >
+       Register
+     </button>
+   </form>
+ </div>
