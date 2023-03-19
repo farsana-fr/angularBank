@@ -2,7 +2,7 @@
 
 <div class="  text-center p-5">
    <h3 class="text-light mb-5">Sign Up</h3>
-   <form action="" class="outer container border rounded-4 p-2">
+   <form action="" (ngSubmit)="register()" class="outer container border rounded-4 p-2">
      <input
        type="text" 
        [(ngModel)]="uName"
@@ -25,9 +25,9 @@
        required
      /><br />
      <button
-       type="button"
+       type="submit"
        id="register"
-        (click)="register()"
+        
        class="btn btn-success rounded-pill"
      >
        Register

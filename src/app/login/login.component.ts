@@ -30,16 +30,14 @@ export class LoginComponent implements OnInit {
     console.log(uDetails);
     console.log(acNo);
     console.log(passW);
-    if (acNo in uDetails) {
-      console.log(uDetails[acNo]['password']);
-      if (passW == uDetails[acNo]['password']) {
-        alert('Login Success');
-        this.router.navigateByUrl('dashboard')
-      } else {
-        alert('Incorrect Password');
-      }
-    } else {
-      alert('Account Number is Incorrect');
+    const result=this.ds.login(acNo,passW);
+    if(result)
+    {
+      this.router.navigateByUrl('dashboard')
+    }
+    else
+    {
+      alert("Incorrect Account No/Password")
     }
   }
   // accEnter(event: any) {
