@@ -1,75 +1,93 @@
-<h2 class="container text-light text-center">Welcome {{user}}</h2>
+<h2 class="container text-light text-center">Welcome {{ user }}</h2>
 <div class="row m-5">
-<div class=" deposit col-lg-6 ">
+  <div class="deposit col-lg-6">
     <h2 class="text-light">Deposit</h2>
-    <form action="" (ngSubmit)="deposit()" class="outer container border rounded-4 p-2">
-     
-        <input
-          type="text" [(ngModel)]="accNo"
-          id="AccNo" name="AccNoName"
-          class="m-4 w-50"
-          [placeholder]="inputAccNo"
-          required/><br />
-        
-        <input
-          type="password" 
-          [(ngModel)]="pwd"
-          id="Pwd" name="PwdName"
-          class="m-4 w-50"
-          [placeholder]="inputPWD"
-          required
-        /><br />
-        <input
-          type="text" 
-          id="amt" name="amtName"
-          class="m-4 w-50"
-          placeholder="Enter Amount to be Deposited"
-          required
-        /><br />
-        <button
-          type="submit"
-          id="depositID"
-          
-          class=" btn btn-success rounded-pill"
-        >
-          Deposit
-        </button>
-      </form> 
-</div>
-<div class="withdraw col-lg-6">
+    <form
+      action=""
+      (ngSubmit)="deposit()"
+      class="outer container border rounded-4 p-2"
+    >
+      <input
+        type="text"
+        [(ngModel)]="accNo"
+        id="AccNo"
+        name="AccNoName"
+        class="m-4 w-50"
+        [placeholder]="inputAccNo"
+        required
+      /><br />
+
+      <input
+        type="password"
+        [(ngModel)]="pwd"
+        id="Pwd"
+        name="PwdName"
+        class="m-4 w-50"
+        [placeholder]="inputPWD"
+        required
+      /><br />
+      <input
+        type="text"
+        [(ngModel)]="amt"
+        id="amt"
+        name="amtName"
+        class="m-4 w-50"
+        placeholder="Enter Amount to be Deposited"
+        required
+      /><br />
+      <button
+        type="button"
+        id="depositID"
+        (click)="deposit()"
+        class="btn btn-success rounded-pill"
+      >
+        Deposit
+      </button>
+    </form>
+  </div>
+  <div class="withdraw col-lg-6">
     <h2 class="text-light">Withdraw</h2>
-    <form action="" (ngSubmit)="withdraw()" class="outer container border rounded-4 p-2">
-     
-        <input
-          type="text" [(ngModel)]="accNo"
-          id="AccNo" name="AccNoName"
-          class="m-4 w-50"
-          [placeholder]="inputAccNo"
-          required/><br />
-        
-        <input
-          type="password" 
-          [(ngModel)]="pwd"
-          id="Pwd" name="PwdName"
-          class="m-4 w-50"
-          [placeholder]="inputPWD"
-          required
-        /><br />
-        <input
-          type="text" 
-          id="amt" name="amtName"
-          class="m-4 w-50"
-          placeholder="Enter Amount to be Withdrawn"
-          required
-        /><br />
-        <button
-          type="submit"
-          id="depositID"
-          
-          class="btn btn-success rounded-pill"
-        >
-          Withdraw
-        </button>
-      </form> 
-</div>
+    <form
+      action=""
+      (ngSubmit)="withdraw()"
+      class="outer container border rounded-4 p-2"
+    >
+      <input
+        type="text"
+        [(ngModel)]="accNo1"
+        id="AccNo"
+        name="AccNoName"
+        class="m-4 w-50"
+        [placeholder]="inputAccNo"
+        required
+      /><br />
+
+      <input
+        type="password"
+        [(ngModel)]="pwd1"
+        id="Pwd"
+        name="PwdName"
+        class="m-4 w-50"
+        [placeholder]="inputPWD"
+        required
+      /><br />
+      <input
+        type="text"
+        [(ngModel)]="amt1"
+        id="amt"
+        name="amtName"
+        class="m-4 w-50"
+        placeholder="Enter Amount to be Withdrawn"
+        required
+      /><br />
+      <button
+        type="button"
+        id="withdrawID"
+        (click)="withdraw()"
+        class="btn btn-success rounded-pill"
+      >
+        Withdraw
+      </button>
+    </form>
+  </div>
 </div>
