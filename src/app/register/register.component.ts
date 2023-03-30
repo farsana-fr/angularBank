@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
@@ -13,17 +14,32 @@ export class RegisterComponent implements OnInit {
   pwd: any;
 
   //Dependency Injection
-  constructor(private router: Router, private ds: DataService) {}
+  constructor(
+    private router: Router,
+    private ds: DataService,
+    private fb: FormBuilder
+  ) {}
+
+  //model for Register
+  registerForm=this.fb.group(
+    {
+      uName:['',[Validators.required]],
+      accNo:['',[Validators.required]],
+      pwd:['',[Validators.required]]
+      
+    }
+  )
 
   ngOnInit(): void {}
 
   register() {
-    var uName = this.uName;
-    var accNo = this.accNo;
-    var pwd = this.pwd;
+    var uName = this.registerForm.value.uName;
+    var accNo = this.registerForm.value.accNo;
+    var pwd = this.registerForm.value.pwd;
     var userDetails = this.ds.userDetails;
-
-    if (accNo && pwd && uName) {
+console.log(this.registerForm);
+    if(this.registerForm.valid)
+     {
       // alert('Registered');
       const result = this.ds.register(uName, accNo, pwd);
       console.log(accNo);
@@ -37,7 +53,7 @@ export class RegisterComponent implements OnInit {
         this.router.navigateByUrl('');
       } else alert('Account Number Already Exists');
     } else {
-      alert('Please fill all details');
+      alert('Please fill correct details');
     }
   }
 }

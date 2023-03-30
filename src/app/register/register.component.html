@@ -2,32 +2,42 @@
 
 <div class="  text-center p-5">
    <h3 class="text-light mb-5">Sign Up</h3>
-   <form action="" (ngSubmit)="register()" class="outer container border rounded-4 p-2">
+   <form [formGroup]="registerForm"  class="outer container border rounded-4 p-2">
      <input
        type="text" 
-       [(ngModel)]="uName"
+       formControlName="uName"
+       
        id="uNameID" name="uName"
        class="m-4 w-50"
        placeholder="Enter FullName"
        required/><br />
+       <div *ngIf="this.registerForm.get('uName')?.errors && this.registerForm.get('uName')?.touched" class="ms-5 text-start" >
+        <p class="text-danger">Please Enter Charcters Only</p>
+       </div>
      <input
        type="text" 
-       [(ngModel)]="accNo"
+       formControlName="accNo"
        id="accID" name="accName"
        class="m-4 w-50"
        placeholder="Enter Account Number"
        required/><br />
+       <div *ngIf="this.registerForm.get('accNo')?.errors && this.registerForm.get('accNo')?.touched" class="ms-5 text-start" >
+        <p class="text-danger">Please Enter Numbers Only</p>
+       </div>
      <input
-       type="password" [(ngModel)]="pwd"
+       type="password" formControlName="pwd"
        id="pwdID" name="pwdName"
        class="m-4 w-50"
        placeholder="Enter password"
        required
      /><br />
+     <div *ngIf="this.registerForm.get('pwd')?.errors && this.registerForm.get('pwd')?.touched" class="ms-5 text-start" >
+      <p class="text-danger">Please fill in</p>
+     </div>
      <button
        type="submit"
        id="register"
-        
+       (click)="register()"
        class="btn btn-success rounded-pill"
      >
        Register

@@ -33,7 +33,6 @@ export class DashboardComponent {
     const newBalnc = this.ds.deposit(accNo, pwd, amt);
     console.log("Deposit");
     if (newBalnc) {
-      this.ds.userDetails[accNo]['balance'] += amt;
       alert(`Your account is credited with Rs.${amt}.\nBalance is Rs.${newBalnc}`);
     }
   }

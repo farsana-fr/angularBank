@@ -2,10 +2,10 @@
  <h2 class="text-light text-center p-4 conatiner">{{caption}}</h2>
  <div class="  text-center p-5">
     <h3 class="text-light mb-5">Log In</h3>
-    <form action="" (ngSubmit)="login()" class="outer container border rounded-4 p-2">
+    <form [formGroup]="loginForm"  class="outer container border rounded-4 p-2">
       <i class="fa-solid fa-user text-light"></i>
       <input
-        type="text" [(ngModel)]="accNo"
+        type="text" formControlName="accNo"
         id="lgnAccNo" name="lgnAccNoName"
         class="m-4 w-50"
         [placeholder]="inputAccNo"
@@ -13,16 +13,16 @@
       <i class="fa-solid fa-lock text-light"></i>
       <input
         type="password" 
-        [(ngModel)]="pwd"
+        formControlName="pwd"
         [id]="lgnPwd" name="lgnPwdName"
         class="m-4 w-50"
         [placeholder]="inputPWD"
         required
       /><br />
       <button
-        type="submit"
+        type="button"
         id="login"
-        
+        (click)="login()"
         class="btn btn-success rounded-pill"
       >
         Log In

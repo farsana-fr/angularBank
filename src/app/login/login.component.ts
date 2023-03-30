@@ -1,5 +1,6 @@
 // import { Component } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
@@ -17,27 +18,35 @@ export class LoginComponent implements OnInit {
 
   accNo = '';
   pwd: any;
-  
-  constructor(private router: Router,private ds:DataService) {
 
-  }
+  constructor(
+    private router: Router,
+    private ds: DataService,
+    private fb: FormBuilder
+  ) {}
 
+  loginForm = this.fb.group({
+    accNo: ['',[Validators.required]],
+    pwd: ['',[Validators.required]],
+  });
   ngOnInit(): void {}
   login() {
-    var acNo = this.accNo;
-    var passW = this.pwd;
+    var acNo = this.loginForm.value.accNo;
+    var passW = this.loginForm.value.pwd;
     var uDetails = this.ds.userDetails;
     console.log(uDetails);
     console.log(acNo);
     console.log(passW);
-    const result=this.ds.login(acNo,passW);
-    if(result)
+    console.log(this.loginForm);
+    console.log(this.loginForm.valid);
+    if(this.loginForm.valid)
     {
-      this.router.navigateByUrl('dashboard')
-    }
-    else
-    {
-      alert("Incorrect Account No/Password")
+      const result = this.ds.login(acNo, passW);
+      if (result) {
+        this.router.navigateByUrl('dashboard');
+      } else {
+        alert('Incorrect Account No/Password');
+      }
     }
   }
   // accEnter(event: any) {
