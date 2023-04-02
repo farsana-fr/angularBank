@@ -10,6 +10,9 @@
         class="m-4 w-50"
         [placeholder]="inputAccNo"
         required/><br />
+        <div *ngIf="this.loginForm.get('accNo')?.errors && this.loginForm.get('accNo')?.touched">
+          <p>Enter Account Number</p>
+        </div>
       <i class="fa-solid fa-lock text-light"></i>
       <input
         type="password" 
@@ -19,6 +22,9 @@
         [placeholder]="inputPWD"
         required
       /><br />
+      <div *ngIf="this.loginForm.get('pwd')?.errors && this.loginForm.get('pwd')?.touched">
+        <p>Enter Password</p>
+      </div>
       <button
         type="button"
         id="login"

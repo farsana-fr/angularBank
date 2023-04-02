@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -21,36 +22,53 @@ export class DashboardComponent {
   pwd1: any;
   amt1 = '';
 
-  constructor(private ds: DataService) {
+  constructor(private ds: DataService, private fb: FormBuilder) {
     this.user = this.ds.currentUser;
+    this.user=localStorage.getItem("currentUser")
   }
   ngOnInit(): void {}
+  depositForm = this.fb.group({
+    accNo: [''],
+    pwd: [''],
+    amt: [''],
+  });
 
+  withdrawForm = this.fb.group({
+    accNo1: [''],
+    pwd1: [''],
+    amt1: [''],
+  });
   deposit() {
-    var accNo = this.accNo;
-    var pwd = this.pwd;
-    var amt = Number.parseInt(this.amt);
-    const newBalnc = this.ds.deposit(accNo, pwd, amt);
-    console.log("Deposit");
-    if (newBalnc) {
-      alert(`Your account is credited with Rs.${amt}.\nBalance is Rs.${newBalnc}`);
+    var accNo = this.depositForm.value.accNo;
+    var pwd = this.depositForm.value.pwd;
+    var amt = this.depositForm.value.amt;
+    // amt=Number.parseInt(this.amt);
+    console.log(this.depositForm.valid);
+    if (this.depositForm.valid) {
+      const newBalnc = this.ds.deposit(accNo, pwd, amt);
+      console.log('Deposit');
+      if (newBalnc) {
+        alert(
+          `Your account is credited with Rs.${amt}.\nBalance is Rs.${newBalnc}`
+        );
+      }
+    } else {
+      alert('Invalid Form');
     }
   }
   withdraw() {
-    var accNo = this.accNo1;
-    var pwd = this.pwd1;
-    var amt = Number.parseInt(this.amt1);
-    var currentBalance=this.ds.userDetails[accNo]["balance"];
-    console.log("Withdraw");
-    if(currentBalance>0 && currentBalance>=amt)
-    {
-      const newBalnc=this.ds.withdraw(accNo,pwd,amt);
-     console.log(this.ds.userDetails[accNo]["balance"]);
-     alert(`Your account is debited with Rs.${amt}.\nBalance is Rs.${newBalnc}`);
-    }
-    else
-    {
-      alert(`Insufficient Balance!!`);
+    var accNo = this.withdrawForm.value.accNo1;
+    var pwd = this.withdrawForm.value.pwd1;
+    var amt = this.withdrawForm.value.amt1;
+    console.log(accNo, pwd, amt);
+    console.log(this.ds.userDetails);
+    if (this.withdrawForm.valid && accNo) {
+      const newBalnc = this.ds.withdraw(accNo, pwd, amt);
+      alert(
+        `Your account is debited with Rs.${amt}.\nBalance is Rs.${newBalnc}`
+      );
+    } else {
+      alert('Invalid Form');
     }
   }
 }

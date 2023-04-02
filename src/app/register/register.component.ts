@@ -21,14 +21,11 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   //model for Register
-  registerForm=this.fb.group(
-    {
-      uName:['',[Validators.required]],
-      accNo:['',[Validators.required]],
-      pwd:['',[Validators.required]]
-      
-    }
-  )
+  registerForm = this.fb.group({
+    uName: ['', [Validators.required]],
+    accNo: ['', [Validators.required]],
+    pwd: ['', [Validators.required]],
+  });
 
   ngOnInit(): void {}
 
@@ -37,21 +34,19 @@ export class RegisterComponent implements OnInit {
     var accNo = this.registerForm.value.accNo;
     var pwd = this.registerForm.value.pwd;
     var userDetails = this.ds.userDetails;
-console.log(this.registerForm);
-    if(this.registerForm.valid)
-     {
+    console.log(this.registerForm);
+    if (this.registerForm.valid) {
       // alert('Registered');
-      const result = this.ds.register(uName, accNo, pwd);
-      console.log(accNo);
+      this.ds.register(uName, accNo, pwd).subscribe((result: any) => {
+          alert(result.message);
+          this.router.navigateByUrl('/');
+        },result=>{
+          alert(result.error.message);
+        }
+        )
       console.log(uName);
       console.log(pwd);
       console.log(userDetails);
-      console.log(result);
-
-      if (result) {
-        alert('Registered Successfully');
-        this.router.navigateByUrl('');
-      } else alert('Account Number Already Exists');
     } else {
       alert('Please fill correct details');
     }

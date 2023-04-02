@@ -16,9 +16,6 @@ export class LoginComponent implements OnInit {
   inputPWD = 'Enter your Password';
   lgnPwd = 'lgnPwd';
 
-  accNo = '';
-  pwd: any;
-
   constructor(
     private router: Router,
     private ds: DataService,
@@ -26,8 +23,8 @@ export class LoginComponent implements OnInit {
   ) {}
 
   loginForm = this.fb.group({
-    accNo: ['',[Validators.required]],
-    pwd: ['',[Validators.required]],
+    accNo: ['', [Validators.required]],
+    pwd: ['', [Validators.required]],
   });
   ngOnInit(): void {}
   login() {
@@ -39,14 +36,23 @@ export class LoginComponent implements OnInit {
     console.log(passW);
     console.log(this.loginForm);
     console.log(this.loginForm.valid);
-    if(this.loginForm.valid)
-    {
-      const result = this.ds.login(acNo, passW);
-      if (result) {
-        this.router.navigateByUrl('dashboard');
-      } else {
-        alert('Incorrect Account No/Password');
+    if (this.loginForm.valid) {
+      console.log("LINE 40");
+      this.ds.login(acNo, passW).subscribe((result:any)=>{
+
+        console.log(result);
+         localStorage.setItem("currentUser",result.currentUser);
+         localStorage.setItem("currentAccNo",JSON.stringify(result.currentAccNo));
+         localStorage.setItem("token",JSON.stringify(result.token));
+        this.router.navigateByUrl('dashboard')
+
+      },
+      result=>{
+        alert(result.error.message)
       }
+      )
+    } else {
+      alert('Inavlid Form');
     }
   }
   // accEnter(event: any) {

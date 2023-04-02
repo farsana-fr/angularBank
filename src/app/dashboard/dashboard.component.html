@@ -5,13 +5,12 @@
   <div class="deposit col-lg-6">
     <h2 class="text-light">Deposit</h2>
     <form
-      action=""
-      (ngSubmit)="deposit()"
+      action="" [formGroup]="depositForm"
       class="outer container border rounded-4 p-2"
     >
       <input
         type="text"
-        [(ngModel)]="accNo"
+        formControlName="accNo"
         id="AccNo"
         name="AccNoName"
         class="m-4 w-50"
@@ -21,7 +20,7 @@
 
       <input
         type="password"
-        [(ngModel)]="pwd"
+        formControlName="pwd"
         id="Pwd"
         name="PwdName"
         class="m-4 w-50"
@@ -30,7 +29,7 @@
       /><br />
       <input
         type="text"
-        [(ngModel)]="amt"
+        formControlName="amt"
         id="amt"
         name="amtName"
         class="m-4 w-50"
@@ -51,12 +50,13 @@
     <h2 class="text-light">Withdraw</h2>
     <form
       action=""
+      [formGroup]="withdrawForm"
       (ngSubmit)="withdraw()"
       class="outer container border rounded-4 p-2"
     >
       <input
         type="text"
-        [(ngModel)]="accNo1"
+       formControlName="accNo1"
         id="AccNo"
         name="AccNoName"
         class="m-4 w-50"
@@ -66,7 +66,7 @@
 
       <input
         type="password"
-        [(ngModel)]="pwd1"
+        formControlName="pwd1"
         id="Pwd"
         name="PwdName"
         class="m-4 w-50"
@@ -75,7 +75,7 @@
       /><br />
       <input
         type="text"
-        [(ngModel)]="amt1"
+        formControlName="amt1"
         id="amt"
         name="amtName"
         class="m-4 w-50"

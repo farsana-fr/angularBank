@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -6,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class DataService {
   currentUser: any;
   currentAccNo: any;
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   userDetails: any = {
     1001: {
@@ -40,36 +41,26 @@ export class DataService {
   };
 
   register(uName: any, acno: any, pwd: any) {
-    console.log("register",acno);
-    console.log(this.userDetails);
-    if (acno in this.userDetails) {
-      return false;
-    } else {
-      this.userDetails[acno] = {
-        acno,
-        username: uName,
-        password: pwd,
-        balance: 0,
-        transaction: [],
-      };
-      return true;
-    }
+    const data={uName,acno,pwd};
+    return this.http.post('http://localhost:3000/register',data);
   }
   login(acno: any, pwd: any) {
-    var uDetails = this.userDetails;
-    //to identify user to show transaction history
-    this.currentAccNo = acno;
-    if (acno in uDetails) {
-      console.log(uDetails[acno]['password']);
-      if (pwd == uDetails[acno]['password']) {
-        this.currentUser = uDetails[acno]['username'];
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
+    const data={acno,pwd};
+    return this.http.post('http://localhost:3000/login',data);
+    // var uDetails = this.userDetails;
+    // //to identify user to show transaction history
+    // this.currentAccNo = acno;
+    // if (acno in uDetails) {
+    //   console.log(uDetails[acno]['password']);
+    //   if (pwd == uDetails[acno]['password']) {
+    //     this.currentUser = uDetails[acno]['username'];
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // } else {
+    //   return false;
+    // }
   }
 
   deposit(acno: any, pwd: any, amt: any) {
@@ -92,16 +83,22 @@ export class DataService {
 
   withdraw(acno: any, pwd: any, amt: any) {
     if (acno in this.userDetails) {
-      if (pwd == this.userDetails[acno]['password']) {
-        this.userDetails[acno]['balance'] -= Number.parseInt(amt);
-        this.userDetails[acno]['transaction'].push({
-          type: 'DEBIT',
-          amount: Number.parseInt(amt),
-        });
-        console.log(this.userDetails[acno]);
-        return this.userDetails[acno]['balance'];
+      var currentBalance = this.userDetails[acno]['balance'];
+      console.log('Withdraw');
+      if (currentBalance > 0 && currentBalance >= Number(amt)) {
+        if (pwd == this.userDetails[acno]['password']) {
+          this.userDetails[acno]['balance'] -= Number.parseInt(amt);
+          this.userDetails[acno]['transaction'].push({
+            type: 'DEBIT',
+            amount: Number.parseInt(amt),
+          });
+          console.log(this.userDetails[acno]);
+          return this.userDetails[acno]['balance'];
+        } else {
+          return false;
+        }
       } else {
-        return false;
+        alert('Insufficient Balance');
       }
     } else {
       return false;
